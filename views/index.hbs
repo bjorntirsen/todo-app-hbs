@@ -3,7 +3,9 @@
 <div>
   <ul>
     {{#each items}}
-      <li><a href='/items/{{this.id}}'>{{this.title}}</a></li>
+      <li><a href='/items/{{this.id}}'>{{this.title}}</a><span> - </span><a
+          href='/delete/{{this.id}}'
+        >delete</a></li>
     {{/each}}
   </ul>
 </div>

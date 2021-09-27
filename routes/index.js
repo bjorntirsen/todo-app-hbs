@@ -84,4 +84,12 @@ router.post('/items', (req, res, next) => {
   res.redirect('/');
 });
 
+/* GET delete item. */
+router.get('/delete/:id', (req, res, next) => {
+  const itemId = parseInt(req.params.id);
+  todoItems = todoItems.filter((item) => item.id !== itemId);
+  res.statusCode = 204;
+  res.redirect('/');
+});
+
 module.exports = router;
