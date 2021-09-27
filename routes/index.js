@@ -56,6 +56,7 @@ router.post('/items/:id', function (req, res, next) {
     };
     const filteredItems = todoItems.filter((item) => item.id !== itemId);
     todoItems = [...filteredItems, updatedItem];
+    todoItems = todoItems.sort((first, second) => first.id - second.id);
     res.statusCode = 200;
     res.render('item', { title: 'Updated Björns TODO', item: updatedItem });
   }
@@ -65,20 +66,22 @@ router.post('/items/:id', function (req, res, next) {
 router.post('/items', (req, res, next) => {
   let highestId = 0;
   todoItems.forEach((item) => {
-    if (item.id > highestId) highestId = item.id;
+    if (item.id > highestId) highestId = parseInt(item.id);
   });
-  console.log(`Highest id is: ${highestId}`);
 
   const newItem = {
-    id: highestId++,
+    id: highestId + 1,
     title: req.body.title,
     content: req.body.content,
   };
 
+  console.log(`Created new item: `);
+  console.log(newItem);
+
   todoItems.push(newItem);
   //todoItems = [...todoItems, newItem];
   res.statusCode = 201;
-  res.render('index', { title: 'Björns TODO', items: todoItems });
+  res.redirect('/');
 });
 
 module.exports = router;

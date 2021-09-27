@@ -3,7 +3,22 @@
 <div>
   <ul>
     {{#each items}}
-    <li><a href="/items/{{this.id}}">{{this.title}}</a></li>
+      <li><a href='/items/{{this.id}}'>{{this.title}}</a></li>
     {{/each}}
   </ul>
 </div>
+<h2>Create new item</h2>
+<form action='/items' method='POST'>
+  <div>
+    <input type='text' name='title' value='' placeholder='Item title' />
+    <p>
+      <textarea
+        name='content'
+        cols='30'
+        rows='10'
+        placeholder='Item content'
+      ></textarea>
+    </p>
+    <input type='submit' />
+  </div>
+</form>
